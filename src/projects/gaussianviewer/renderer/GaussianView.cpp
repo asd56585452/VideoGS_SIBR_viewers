@@ -267,7 +267,7 @@ void sibr::GaussianView::readyVideo_func() {
 
 unsigned long long getNetReceivedBytes() {
     std::ifstream file("/proc/net/dev");
-	const std::string interface("enp4s0");
+	const std::string interface("enp0s31f6");
     std::string line;
     while (std::getline(file, line)) {
         if (line.find(interface) != std::string::npos) {

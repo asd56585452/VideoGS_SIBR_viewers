@@ -1,6 +1,8 @@
-# Streaming Volumetric Video Viewer for V3: Viewing Volumetric Videos on Mobiles via Streamable 2D Dynamic Gaussians
+# Streaming Volumetric Video SIBR Viewer for V3: Viewing Volumetric Videos on Mobiles via Streamable 2D Dynamic Gaussians
 
 Official implementation of the streaming volumetric video viewer for _V^3: Viewing Volumetric Videos on Mobiles via Streamable 2D Dynamic Gaussians_.
+
+![viewer](assets/viewer.png)
 
 Please note that the SIBR viewer is only tested on Ubuntu, maybe not work for other platforms due to the video codec. 
 
@@ -17,9 +19,32 @@ cmake --build build -j24 --target install
 
 ## Usage
 
-Please setup a nginx server in the internal network to serve as a streaming server. 
+Please setup a nginx server in the internal network to serve as a streaming server, and put converted video data on the nginx server. 
 
 Then modify the network address in `src/projects/gaussianviewer/renderer/GaussianView.hpp`, rebuild it and run it. 
+
+Command:
+```
+./install/bin/SIBR_gaussianViewer_app -m xxx(Path to the frame 0 ckpt)
+```
+You need to pass the first frame ckpt to the viewer, as the viewer needs the camera.json to initialize the view. 
+
+## Code illustration
+
+We maintain arrays storing multi frame gaussians at `src/projects/gaussianviewer/renderer/GaussianView.hpp`, including
+```
+pos_cuda_array
+rot_cuda_array
+scale_cuda_array
+opacity_cuda_array
+shs_cuda_array
+```
+and change the frame index to play dynamic volumetric videos. 
+
+There are 3 threads will be lanuched when the viewer lanuched:
+- Thread 1 is for rendering. 
+- Thread 2 is for downloading the videos from the server and convert to gray scale images, this is implemented by OpenCV at `src/projects/gaussianviewer/renderer/OpenCVVideoDecoder.hpp`, we also implement a decoder with FFmpeg at `src/projects/gaussianviewer/renderer/GSVideoDecoder.hpp`, but we use the one with OpenCV in default.
+- Thread 3 is for converting images to gaussian data, which is implemented at `src/projects/gaussianviewer/renderer/GaussianView.cpp` function `readyVideo_func`. This function including data dequantization, convert to gaussian data, and memory copy to cuda. Please NOTE that for decoder efficiency, we remove the morton sort, normalize quaternion, expoentiate scale, activate alpha. Instead, we implement these steps when we compress the gaussian ckpt to videos after training. 
 
 ## Acknowledgement
 
