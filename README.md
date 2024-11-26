@@ -34,6 +34,12 @@ Command:
 ```
 You need to pass the first frame ckpt to the viewer, as the viewer needs the camera.json to initialize the view. 
 
+## Control
+
+The main control is same as 3DGS SIBR viewer. 
+
+For dynamic play, click the button `multi view play` in `Play` to play the video. You can also change the frame by dragging the slider `playing frame`in `Play` panel. To change the video, select the remote server link of `Remote Video list` in `3D Gaussians` planel. 
+
 ## Code illustration
 
 We maintain arrays storing multi frame gaussians at `src/projects/gaussianviewer/renderer/GaussianView.hpp`, including
@@ -58,13 +64,14 @@ This viewer is based on the original [gaussian-splatting viewer](https://github.
 If you found our work useful, please kindly cite our paper:
 
 ```
-@misc{wang2024v3viewingvolumetricvideos,
-      title={V^3: Viewing Volumetric Videos on Mobiles via Streamable 2D Dynamic Gaussians}, 
-      author={Penghao Wang and Zhirui Zhang and Liao Wang and Kaixin Yao and Siyuan Xie and Jingyi Yu and Minye Wu and Lan Xu},
-      year={2024},
-      eprint={2409.13648},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2409.13648}, 
+@article{wang2024v,
+  title={V\^{} 3: Viewing Volumetric Videos on Mobiles via Streamable 2D Dynamic Gaussians},
+  author={Wang, Penghao and Zhang, Zhirui and Wang, Liao and Yao, Kaixin and Xie, Siyuan and Yu, Jingyi and Wu, Minye and Xu, Lan},
+  journal={ACM Transactions on Graphics (TOG)},
+  volume={43},
+  number={6},
+  pages={1--13},
+  year={2024},
+  publisher={ACM New York, NY, USA}
 }
 ```
