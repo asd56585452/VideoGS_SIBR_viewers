@@ -147,8 +147,8 @@ namespace sibr {
 
 		int current_video_item = 0;
 		std::vector<const char*> video_path = {
-			// "http://10.15.89.67:10000/wyw_hifivv/",
-			"http://10.15.89.67:10000/hanfu3_qp15/",
+			"http://192.168.50.200/files/RUN_NFOV_2X2BINNED_HiFi4G_location_process_feature_video_png_all_25/",
+			"http://192.168.50.200/files/4K_Actor1_Greeting_Preprocess/feature_video/png_all_25/",
 			"http://10.15.89.67:10000/0923dancer3/",
 			"http://10.15.89.67:10000/jywq_demo/",
 			"http://10.15.89.67:10000/ykx_boxing_long_qp15/",
@@ -161,7 +161,7 @@ namespace sibr {
 			"http://10.15.89.67:10000/coser18_qp0_new/"
 		};
 		std::vector<int> video_sh = {
-			// 0,
+			0,
 			0,
 			0,
 			0,
